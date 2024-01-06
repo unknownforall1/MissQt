@@ -14,48 +14,48 @@
     "env": {
       "API_ID": {
         "description": "Get this value from https://my.telegram.org",
-        "value": "16868323",
-        "required": true
+        "value": "",
+        "required": False
       },
       "API_HASH": {
         "description": "Get this value from https://my.telegram.org",
-        "value": "3e37c0e7440add9ed2c913a5f6f70378",
-        "required": true
+        "value": "",
+        "required": False
       },
       "BOT_TOKEN": {
         "description": "A Bot's token from Botfather",
         "value": "",
-        "required": true
+        "required": False
       },
       "MONGO_DB_URI": {
         "description": "Get a mongodb url from https://cloud.mongodb.com.",
         "value": "",
-        "required": true
+        "required": False
       },
       "OWNER_ID": {
         "description": "The user id of user whom you would like to add as OWNER.",
-        "value": "5982904247",
-        "required": true
+        "value": "",
+        "required": False
       },
       "STRING_SESSION": {
         "description": "A Pyrogram v2 String Session from @StringFatherBot on Telegram.",
         "value": "",
-        "required": true
+        "required": False
       },
       "HEROKU_API_KEY": {
         "description": "Your Heroku account's API key",
         "value": "",
-        "required": false
+        "required": False
       },
       "HEROKU_APP_NAME": {
         "description": "Your heroku app name",
         "value": "",
-        "required": false
+        "required": False
       },
       "LOG_GROUP_ID": {
         "description": "Your Log Group ID, add your bot and promote as an admin with full rights!. Channel ki id mat daal dena bsdk.",
-        "value": "-1001862382526",
-        "required": true
+        "value": "",
+        "required": False
       }
     },
     "buildpacks": [

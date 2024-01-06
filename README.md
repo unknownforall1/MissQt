@@ -1,10 +1,10 @@
 [![Deploy+On+Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/saifalisew1508/SayuMusic)
 
 
-<h1 align="center">🎵 Aviax Music Bot 🎵</h1>
+<h1 align="center">🎵 Miss Qt Music Bot 🎵</h1>
 
 <p align="center">
-  <img src="https://telegra.ph/file/29808c1fd50add3b1bfc6.jpg" alt="Aviax Music Logo" width="600" height="150">
+  <img src="https://graph.org/file/e0b63cf95da7dfc299273.jpg" alt="Miss Qt Music Logo" width="600" height="150">
 </p>
 
 <p align="center">
@@ -86,6 +86,7 @@ The Aviax Music Bot offers a range of commands to enhance your music listening e
 | Command                 | Description                                 |
 |-------------------------|---------------------------------------------|
 | `/play <song name>`     | Play the requested song.                    |
+| `/vplay <song name>`    | Play video of the requested song.
 | `/pause`                | Pause the currently playing song.           |
 | `/resume`               | Resume the paused song.                     |
 | `/skip`                 | Move to the next song in the queue.         |
@@ -134,6 +135,6 @@ This project is licensed under the MIT License. For more details, see the [LICEN
 ### 🙏 Acknowledgements
 
 Special thanks to all the contributors, supporters, and users of the Aviax Music Bot. Your feedback and support keep us going!
-- [Yukki Music](https://github.com/TeamYukki/YukkiMusicBot) and [AnonXMusic](https://github.com/AnonymousX1025/AnonXMusic) For their Source Codes.
+- [Aviax Music ](https://github.com/TeamAviax/AviaxMusic) ,[Yukki Music](https://github.com/TeamYukki/YukkiMusicBot) and [AnonXMusic](https://github.com/AnonymousX1025/AnonXMusic) For their Source Codes.
 - [⏤͟͞𝘼𝘿𝙞𝙏𝙔𝘼 ༗](https://t.me/Aditya_xDz) For Music Thumbnail Idea.
 

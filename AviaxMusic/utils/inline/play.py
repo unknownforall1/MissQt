@@ -1,5 +1,5 @@
 import math
-
+import config
 from pyrogram.types import InlineKeyboardButton
 
 from AviaxMusic.utils.formatters import time_to_seconds
@@ -67,7 +67,8 @@ def stream_markup_timer(_, chat_id, played, dur):
             )
         ],
         [InlineKeyboardButton(text=_["CLOSE_BUTTON"], callback_data="close"),
-         InlineKeyboardButton(text="𝐀𝐝𝐝 𝐌𝐞 𝐈𝐧 𝐘𝐨𝐮𝐫 𝐆𝐫𝐨𝐮𝐩", url="https://t.me/MissQtBot?startgroup=true")]
+         InlineKeyboardButton(text="𝐇𝐞𝐥𝐩", url= config.STARTMELINK),
+         InlineKeyboardButton(text="𝐀𝐝𝐝 𝐌𝐞", url= config.ADDMELINK)]
     ]
     return buttons
 

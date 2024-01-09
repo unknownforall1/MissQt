@@ -66,7 +66,8 @@ def stream_markup_timer(_, chat_id, played, dur):
                 callback_data="GetTimer",
             )
         ],
-        [InlineKeyboardButton(text=_["CLOSE_BUTTON"], callback_data="close")],
+        [InlineKeyboardButton(text=_["CLOSE_BUTTON"], callback_data="close"),
+         InlineKeyboardButton(text="𝐀𝐝𝐝 𝐌𝐞 𝐈𝐧 𝐘𝐨𝐮𝐫 𝐆𝐫𝐨𝐮𝐩", url="https://t.me/MissQtBot?startgroup=true")]
     ]
     return buttons
 

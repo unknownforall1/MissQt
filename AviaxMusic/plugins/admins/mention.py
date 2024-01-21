@@ -10,15 +10,7 @@ from AviaxMusic.utils import extract_user, int_to_alpha
 from AviaxMusic.utils.decorators import AdminActual, language
 from AviaxMusic.utils.inline import close_markup
 from config import BANNED_USERS, adminlist
-
-
-
-
-
-
-SPAM_CHATS = []
-
-
+SPAMCHATS = []
 @app.on_message(filters.command(["mentionall", "all", "mention", "tagall" ], prefixes=["/", "@", "#"]) & filters.group)
 @AdminActual
 async def tag_all_users(_,message): 
@@ -29,11 +21,11 @@ async def tag_all_users(_,message):
         return                  
     if replied:
          await message.reply_text("**ᴛᴀɢ ᴀʟʟ ꜱᴛᴀʀᴛᴇᴅ . ғᴏʀ ꜱᴛᴏᴘ ᴜꜱᴇ :- /ᴄᴀɴᴄᴇʟ!**")
-        SPAM_CHATS.append(message.chat.id)      
+        SPAMCHATS.append(message.chat.id)      
         usernum= 0
         usertxt = ""
         async for m in app.get_chat_members(message.chat.id): 
-            if message.chat.id not in SPAM_CHATS:
+            if message.chat.id not in SPAMCHATS:
                 break       
             usernum += 5
             usertxt += f"\n⊚ [{m.user.first_name}](tg://user?id={m.user.id})\n"
@@ -43,17 +35,17 @@ async def tag_all_users(_,message):
                 usernum = 0
                 usertxt = ""
         try :
-            SPAM_CHATS.remove(message.chat.id)
+            SPAMCHATS.remove(message.chat.id)
         except Exception:
             pass
     else:
         text = message.text.split(None, 1)[1]
         
-        SPAM_CHATS.append(message.chat.id)
+        SPAMCHATS.append(message.chat.id)
         usernum= 0
         usertxt = ""
         async for m in app.get_chat_members(message.chat.id):       
-            if message.chat.id not in SPAM_CHATS:
+            if message.chat.id not in SPAMCHATS:
                 break 
             usernum += 1
             usertxt += f"\n⊚ [{m.user.first_name}](tg://user?id={m.user.id})\n"
@@ -63,7 +55,7 @@ async def tag_all_users(_,message):
                 usernum = 0
                 usertxt = ""                          
         try :
-            SPAM_CHATS.remove(message.chat.id)
+            SPAMCHATS.remove(message.chat.id)
         except Exception:
             pass        
            
@@ -71,9 +63,9 @@ async def tag_all_users(_,message):
 @AdminActual
 async def cancelcmd(_, message):
     chat_id = message.chat.id
-    if chat_id in SPAM_CHATS:
+    if chat_id in SPAMCHATS:
         try :
-            SPAM_CHATS.remove(chat_id)
+            SPAMCHATS.remove(chat_id)
         except Exception:
             pass   
         return await message.reply_text("**ᴛᴀɢ ᴀʟʟ sᴜᴄᴄᴇssғᴜʟʟʏ sᴛᴏᴘᴘᴇᴅ!**")     

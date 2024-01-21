@@ -11,7 +11,7 @@ from AviaxMusic.utils.decorators import AdminActual, language
 from AviaxMusic.utils.inline import close_markup
 from config import BANNED_USERS, adminlist
 SPAMCHATS = []
-@app.on_message(filters.command(["mentionall", "all", "tagall"], prefixes=["/", "@", "#"]) & filters.group)
+@app.on_message(filters.command(["mentionall", "all", "tagall"], prefixes=["/", "@", "#"]))
 @AdminActual
 async def tag_all_users(_,message): 
 

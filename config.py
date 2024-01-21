@@ -40,8 +40,8 @@ GIT_TOKEN = getenv(
 )  # Fill this variable if your upstream repository is private
 
 SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/Mr_X_Main")
-SUPPORT_GROUP = getenv("SUPPORT_GROUP", "https://t.me/Mr_x_Bots")
-
+SUPPORT_GROUP = getenv("SUPPORT_GROUP", "https://t.me/+SFhKCJfFVrNlMWE9")
+NEW_MOVIE = getenv("NEW_MOVIE", "https://t.me/+iplL8IpbTWoxMjhl")
 # Set this to True if you want the assistant to automatically leave chats after an interval
 AUTO_LEAVING_ASSISTANT = bool(getenv("AUTO_LEAVING_ASSISTANT", False))
 
@@ -87,7 +87,7 @@ PLAYLIST_IMG_URL = "https://graph.org//file/3dfcffd0c218ead96b102.png"
 STATS_IMG_URL = "https://graph.org//file/99a8a9c13bb01f9ac7d98.png"
 TELEGRAM_AUDIO_URL = "https://graph.org//file/2f7debf856695e0ef0607.png"
 TELEGRAM_VIDEO_URL = "https://graph.org//file/2f7debf856695e0ef0607.png"
-STREAM_IMG_URL = "https://te.legra.ph/file/bd995b032b6bd263e2cc9.jpg"
+STREAM_IMG_URL = "https://graph.org/file/ad5d482b30e477d157d31.png"
 SOUNCLOUD_IMG_URL = "https://te.legra.ph/file/bb0ff85f2dd44070ea519.jpg"
 YOUTUBE_IMG_URL = "https://graph.org//file/2f7debf856695e0ef0607.png"
 SPOTIFY_ARTIST_IMG_URL = "https://te.legra.ph/file/37d163a2f75e0d3b403d6.jpg"

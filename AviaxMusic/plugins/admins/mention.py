@@ -20,7 +20,7 @@ async def tag_all_users(_,message):
         await message.reply_text("**ʀᴇᴘʟʏ ᴛᴏ ᴀ ᴍᴇssᴀɢᴇ ᴏʀ ɢɪᴠᴇ sᴏᴍᴇ ᴛᴇxᴛ ᴛᴏ ᴛᴀɢ ᴀʟʟ**") 
         return                  
     if replied:
-         await message.reply_text("**ᴛᴀɢ ᴀʟʟ ꜱᴛᴀʀᴛᴇᴅ . ғᴏʀ ꜱᴛᴏᴘ ᴜꜱᴇ :- /ᴄᴀɴᴄᴇʟ!**")
+        await message.reply_text("**ᴛᴀɢ ᴀʟʟ ꜱᴛᴀʀᴛᴇᴅ . ғᴏʀ ꜱᴛᴏᴘ ᴜꜱᴇ :- /ᴄᴀɴᴄᴇʟ!**")
         SPAMCHATS.append(message.chat.id)      
         usernum= 0
         usertxt = ""

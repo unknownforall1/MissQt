@@ -11,12 +11,12 @@ from AviaxMusic.utils.decorators import AdminActual, language
 from AviaxMusic.utils.inline import close_markup
 from config import BANNED_USERS, adminlist
 SPAMCHATS = []
-@app.on_message(filters.command(["mentionall", "all", "mention", "tagall" ], prefixes=["/", "@", "#"]) & filters.group)
+@app.on_message(filters.command(["mentionall", "all", "tagall"], prefixes=["/", "@", "#"]) & filters.group)
 @AdminActual
 async def tag_all_users(_,message): 
 
     replied = message.reply_to_message  
-    if len(message.command) < 2 and not replied:
+    if not replied:
         await message.reply_text("**ʀᴇᴘʟʏ ᴛᴏ ᴀ ᴍᴇssᴀɢᴇ ᴏʀ ɢɪᴠᴇ sᴏᴍᴇ ᴛᴇxᴛ ᴛᴏ ᴛᴀɢ ᴀʟʟ**") 
         return                  
     if replied:
@@ -59,7 +59,7 @@ async def tag_all_users(_,message):
         except Exception:
             pass        
            
-@app.on_message(filters.command(["stopmention", "stopall", "cancelmention", "offmention", "mentionoff", "alloff", "cancelall", "allcancel", "cancel" ], prefixes=["/", "@", "#"]))
+@app.on_message(filters.command(["stopmention", "stopall", "cancelmention", "offmention", "mentionoff", "alloff", "cancelall", "allcancel", "cancel"], prefixes=["/", "@", "#"]))
 @AdminActual
 async def cancelcmd(_, message):
     chat_id = message.chat.id

@@ -7,12 +7,12 @@ from pyrogram.types import ChatPermissions, Message
 #Credit @Sid_MusicBot
 from AviaxMusic import app
 from AviaxMusic.utils import extract_user, int_to_alpha
-from AviaxMusic.utils.decorators import AdminActual, language
+from AviaxMusic.utils.decorators import AdminRightsCheck, language
 from AviaxMusic.utils.inline import close_markup
 from config import BANNED_USERS, adminlist
 SPAMCHATS = []
 @app.on_message(filters.command(["mentionall", "all", "tagall"], prefixes=["/", "@", "#"]))
-@AdminActual
+@AdminRightsCheck
 async def tag_all_users(_,message): 
 
     replied = message.reply_to_message  
@@ -60,7 +60,6 @@ async def tag_all_users(_,message):
             pass        
            
 @app.on_message(filters.command(["stopmention", "stopall", "cancelmention", "offmention", "mentionoff", "alloff", "cancelall", "allcancel", "cancel"], prefixes=["/", "@", "#"]))
-@AdminActual
 async def cancelcmd(_, message):
     chat_id = message.chat.id
     if chat_id in SPAMCHATS:

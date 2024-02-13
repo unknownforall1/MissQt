@@ -1,4 +1,4 @@
-
+py-tgcalls==0.9.2
 aiofiles
 aiohttp
 asyncio

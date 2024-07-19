@@ -14,6 +14,8 @@ def dirr():
 
     if "downloads" not in os.listdir():
         os.mkdir("downloads")
+    if "downloadvid" not in os.listdir():
+        os.mkdir("downloads")
     if "cache" not in os.listdir():
         os.mkdir("cache")
 

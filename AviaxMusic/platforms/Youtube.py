@@ -2,7 +2,7 @@ import asyncio
 import os
 import re
 from typing import Union
-
+import subprocess
 import yt_dlp
 from pyrogram.enums import MessageEntityType
 from pyrogram.types import Message
@@ -12,7 +12,38 @@ from AviaxMusic.utils.database import is_on_off
 from AviaxMusic.utils.formatters import time_to_seconds
 
 
+def find_downloaded_file(video_id, file_path):
+    for file_name in os.listdir(file_path):
+        if file_name.startswith(video_id):
+            return file_name
+    return None
+
+def construct_song_url(video_id: str) -> str:
+    base_url = "https://296c5d5f-b584-4483-9067-8173f7ee8855-00-22fn"  # Replace with your actual base URL
+    return f"{base_url}/song/{video_id}"
+
+def construct_video_url(video_id: str) -> str:
+    base_url = "https://296c5d5f-b584-4483-9067-8173f7ee8855-00-22fn"  # Replace with your actual base URL
+    return f"{base_url}/video/{video_id}"
+    
+def download_media(song_url: str, file_path: str) -> None:
+    curl_command = [
+        "curl", "-L", "-o", file_path, song_url
+    ]
+    try:
+        result = subprocess.run(curl_command, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        if result.returncode != 0:
+            raise subprocess.CalledProcessError(result.returncode, curl_command)
+    except subprocess.CalledProcessError as e:
+        raise RuntimeError(f"Failed to download the media. Error: {e.stderr.decode()}")
+
+
+
+
+
+
 async def shell_cmd(cmd):
+    print("1")
     proc = await asyncio.create_subprocess_shell(
         cmd,
         stdout=asyncio.subprocess.PIPE,
@@ -36,6 +67,7 @@ class YouTubeAPI:
         self.reg = re.compile(r"\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])")
 
     async def exists(self, link: str, videoid: Union[bool, str] = None):
+        print("2")
         if videoid:
             link = self.base + link
         if re.search(self.regex, link):
@@ -44,6 +76,7 @@ class YouTubeAPI:
             return False
 
     async def url(self, message_1: Message) -> Union[str, None]:
+        print("3")
         messages = [message_1]
         if message_1.reply_to_message:
             messages.append(message_1.reply_to_message)
@@ -115,6 +148,7 @@ class YouTubeAPI:
         return thumbnail
 
     async def video(self, link: str, videoid: Union[bool, str] = None):
+        print("video ytdlp 1st")
         if videoid:
             link = self.base + link
         if "&" in link:
@@ -135,6 +169,7 @@ class YouTubeAPI:
             return 0, stderr.decode()
 
     async def playlist(self, link, limit, user_id, videoid: Union[bool, str] = None):
+        print("playlist")
         if videoid:
             link = self.listbase + link
         if "&" in link:
@@ -173,6 +208,7 @@ class YouTubeAPI:
         return track_details, vidid
 
     async def formats(self, link: str, videoid: Union[bool, str] = None):
+        print("formats ka dikaat")
         if videoid:
             link = self.base + link
         if "&" in link:
@@ -238,44 +274,38 @@ class YouTubeAPI:
         title: Union[bool, str] = None,
     ) -> str:
         if videoid:
+            video_id = videoid
             link = self.base + link
         loop = asyncio.get_running_loop()
 
         def audio_dl():
-            ydl_optssx = {
-                "format": "bestaudio/best",
-                "outtmpl": "downloads/%(id)s.%(ext)s",
-                "geo_bypass": True,
-                "nocheckcertificate": True,
-                "quiet": True,
-                "no_warnings": True,
-            }
-            x = yt_dlp.YoutubeDL(ydl_optssx)
-            info = x.extract_info(link, False)
-            xyz = os.path.join("downloads", f"{info['id']}.{info['ext']}")
-            if os.path.exists(xyz):
+            print("audio dl")
+            song_url = construct_song_url(video_id)
+            file_path = "downloads/"
+            download_media(song_url, file_path)
+            downloaded_file = find_downloaded_file(video_id, file_path)
+            if downloaded_file:
+                xyz = os.path.join(file_path, downloaded_file)
+                print(f"File exists: {xyz}")
                 return xyz
-            x.download([link])
-            return xyz
+            else:
+                print(f"File with ID {video_id} does not exist in {file_path}")
 
         def video_dl():
-            ydl_optssx = {
-                "format": "(bestvideo[height<=?720][width<=?1280][ext=mp4])+(bestaudio[ext=m4a])",
-                "outtmpl": "downloads/%(id)s.%(ext)s",
-                "geo_bypass": True,
-                "nocheckcertificate": True,
-                "quiet": True,
-                "no_warnings": True,
-            }
-            x = yt_dlp.YoutubeDL(ydl_optssx)
-            info = x.extract_info(link, False)
-            xyz = os.path.join("downloads", f"{info['id']}.{info['ext']}")
-            if os.path.exists(xyz):
+            print("video dl")
+            song_url = construct_video_url(video_id)
+            file_path = "downloadvid/"
+            download_media(song_url, file_path)
+            downloaded_file = find_downloaded_file(video_id, file_path)
+            if downloaded_file:
+                xyz = os.path.join(file_path, downloaded_file)
+                print(f"File exists: {xyz}")
                 return xyz
-            x.download([link])
-            return xyz
+            else:
+                print(f"File with ID {video_id} does not exist in {file_path}")
 
         def song_video_dl():
+            print("song video dl")
             formats = f"{format_id}+140"
             fpath = f"downloads/{title}"
             ydl_optssx = {
@@ -292,6 +322,7 @@ class YouTubeAPI:
             x.download([link])
 
         def song_audio_dl():
+            print("song audio")
             fpath = f"downloads/{title}.%(ext)s"
             ydl_optssx = {
                 "format": format_id,
@@ -313,18 +344,22 @@ class YouTubeAPI:
             x.download([link])
 
         if songvideo:
+            print("songvideo if")
             await loop.run_in_executor(None, song_video_dl)
             fpath = f"downloads/{title}.mp4"
             return fpath
         elif songaudio:
+            print("songaudio if")
             await loop.run_in_executor(None, song_audio_dl)
             fpath = f"downloads/{title}.mp3"
             return fpath
         elif video:
+            print("elif video")
             if await is_on_off(1):
                 direct = True
                 downloaded_file = await loop.run_in_executor(None, video_dl)
             else:
+                print("else ytdlp")
                 proc = await asyncio.create_subprocess_exec(
                     "yt-dlp",
                     "-g",
